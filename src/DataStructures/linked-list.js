@@ -143,4 +143,3 @@ console.log(list.printList());
 console.log("remove element 3");
 list.remove(3);
 console.log(list.printList());
-//# sourceMappingURL=linked-list.js.map

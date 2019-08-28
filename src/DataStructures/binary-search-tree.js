@@ -206,4 +206,3 @@ console.log("removing 3.1...\n");
 binarySearchTree.remove(3.1);
 console.log("bst...\n");
 console.log(binarySearchTree.printBST());
-//# sourceMappingURL=binary-search-tree.js.map

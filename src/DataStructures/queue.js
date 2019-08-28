@@ -56,4 +56,3 @@ queue.dequeue();
 console.log(queue.printQueue());
 queue.dequeue();
 console.log(queue.printQueue());
-//# sourceMappingURL=queue.js.map

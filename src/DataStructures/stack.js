@@ -42,4 +42,3 @@ stack.pop();
 console.log(stack.printStack());
 stack.pop();
 console.log(stack.printStack());
-//# sourceMappingURL=stack.js.map
