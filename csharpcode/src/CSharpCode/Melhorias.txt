@@ -1,4 +1,0 @@
-﻿- Criar interfaces para as estruturas
-- criar metodo que converte/retorna estrutura em array para permitir iterar sobre a estrutura
-- criar testes de unidade para estruturas
-- implementar alguns padrões de projeto
