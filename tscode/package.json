@@ -1,0 +1,24 @@
+{
+  "name": "tscode",
+  "version": "1.0.0",
+  "description": "estudos em typescript",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/freddgomes/tscode.git"
+  },
+  "author": "Frederico Gomes",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/freddgomes/tscode/issues"
+  },
+  "homepage": "https://github.com/freddgomes/tscode#readme",
+  "dependencies": {
+    "typescript": "^3.5.3"
+  }
+}
