@@ -1,7 +1,7 @@
 "use strict";
 import { LinkedList } from "./linked-list";
 
-class Stack {
+export class Stack {
     constructor() {
         this.count = 0;
         this.list = new LinkedList();
@@ -18,7 +18,6 @@ class Stack {
         return this.list.printList();
     }
 }
-exports.Stack = Stack;
 let stack = new Stack();
 console.log("inserting values");
 stack.push(1);

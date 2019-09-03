@@ -18,7 +18,7 @@ class BSTNode {
         return this.key > key;
     }
 }
-class BinarySearchTree {
+export class BinarySearchTree {
     constructor() {
         this.root = null;
     }
@@ -159,7 +159,6 @@ class BinarySearchTree {
         return this.root ? this.root.toString() : '';
     }
 }
-exports.BinarySearchTree = BinarySearchTree;
 
 let binarySearchTree = new BinarySearchTree();
 binarySearchTree.insert(2.3);

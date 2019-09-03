@@ -1,5 +1,5 @@
 "use strict";
-export class Node {
+class Node {
     constructor(value) {
         this.value = value;
     }
@@ -7,7 +7,7 @@ export class Node {
         return JSON.stringify(this);
     }
 }
-class LinkedList {
+export class LinkedList {
     constructor() {
         this.length = 0;
     }
@@ -87,7 +87,7 @@ class LinkedList {
         return this.head ? this.head.toString() : '';
     }
 }
-exports.LinkedList = LinkedList;
+
 let list = new LinkedList();
 console.log("insert value: 9");
 list.add(9);

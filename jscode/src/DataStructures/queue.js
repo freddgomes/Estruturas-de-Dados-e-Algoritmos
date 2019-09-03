@@ -1,6 +1,6 @@
 "use strict";
 import { LinkedList } from "./linked-list";
-class Queue {
+export class Queue {
     constructor() {
         this.count = 0;
         this.list = new LinkedList();
@@ -22,8 +22,7 @@ class Queue {
         return this.list.printList();
     }
 }
-const _Queue = Queue;
-export { _Queue as Queue };
+
 let queue = new Queue();
 console.log("enqueue");
 queue.enqueue("element 1");
