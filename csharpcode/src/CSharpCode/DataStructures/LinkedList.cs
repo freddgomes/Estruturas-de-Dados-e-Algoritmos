@@ -19,7 +19,6 @@
         }
     }
 
-    // usar equals em comparações, evitar ==
     public class LinkedList<T> : ILinkedList<T>
     {
         public Node<T> Head;
