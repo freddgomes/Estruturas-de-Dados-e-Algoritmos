@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
+// gcc -Wall -std=c11 linked-list.c -o list.exe 
 struct node
 {
     int data;
