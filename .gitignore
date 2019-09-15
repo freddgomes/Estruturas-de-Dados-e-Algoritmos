@@ -409,3 +409,5 @@ ASALocalRun/
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
 
+*.exe
+.DS_Store
