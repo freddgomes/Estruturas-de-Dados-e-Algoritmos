@@ -411,3 +411,6 @@ ASALocalRun/
 
 *.exe
 .DS_Store
+
+a.out
+a.out.*
