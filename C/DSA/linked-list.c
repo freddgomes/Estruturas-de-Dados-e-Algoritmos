@@ -40,28 +40,6 @@ void insertFirst(int key, int data)
     head = link;
 }
 
-void append(int key, int data)
-{
-    struct node *link = (struct node *)malloc(sizeof(struct node));
-
-    link->key = key;
-    link->data = data;
-    if (isEmpty())
-    {
-       head = link;
-    }
-    else
-    {
-        struct node *tempNode;
-        tempNode = head;
-        while (tempNode != NULL && tempNode->next != NULL)
-        {
-            tempNode = tempNode->next;
-        }
-        tempNode->next = link;
-    }
-}
-
 struct node *deleteFirst()
 {
     struct node *tempLink = head;
@@ -81,27 +59,27 @@ int length()
     return length;
 }
 
-struct node *find(int key)
-{
-    struct node *current = head;
+struct node* find(int key) {
 
-    if (head == NULL)
-    {
-        return NULL;
-    }
+   struct node* current = (struct node *)malloc(sizeof(struct node));
 
-    while (current->key != key)
-    {
-        if (current->next == NULL)
-        {
-            return NULL;
-        }
-        else
-        {
-            current = current->next;
-        }
-    }
-    return current;
+   if(head == NULL) {
+      return NULL;
+   }
+
+    current->data = head->data;
+    current->key = head->key;
+    current->next = head->next;
+
+   while(current->key != key) {
+	
+      if(current->next == NULL) {
+         return NULL;
+      } else {
+         current = current->next;
+      }
+   }      
+   return current;
 }
 
 struct node *delete (int key)
@@ -158,12 +136,12 @@ void reverse(struct node **head_ref)
 int main(int argc, char const *argv[])
 {
     printf("insert value...\n");
-    append(1, 10);
-    append(2, 20);
-    append(3, 30);
-    append(4, 1);
-    append(5, 40);
-    append(6, 56);
+    insertFirst(1, 10);
+    insertFirst(2, 20);
+    insertFirst(3, 30);
+    insertFirst(4, 1);
+    insertFirst(5, 40);
+    insertFirst(6, 56);
 
     printf("Linked list\n");
     printList();
@@ -180,7 +158,10 @@ int main(int argc, char const *argv[])
     reverse(&head);
     printList();
     printf("find...\n");
-    int value = find(6)->data;
-    printf("%d \n", value);
+    struct node *nodeValue = find(3);
+    if (nodeValue != NULL)
+    {
+        printf("%d, %d \n", nodeValue->key, nodeValue->data);
+    }
     return 0;
 }
