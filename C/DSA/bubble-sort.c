@@ -24,24 +24,22 @@ void printArray(int *array)
     printf("]\n");
 }
 
-void bubbleSort(int arr[], int size)
-{
+void swap(int arr[], int index1, int index2){
+    int aux = arr[index1];
+    arr[index1] = arr[index2];
+    arr[index2] = aux;
+}
 
-    bool swapped = true;
-    int j = 0;
-    int tmp;
-    while (swapped)
+void bubbleSort(int arr[], int size){
+    int i;
+    int j;
+    for (i = 0; i < size; i++)
     {
-        swapped = false;
-        j++;
-        for (int i = 0; i < size - j; i++)
+        for (j = 0; j < size -1; j++)
         {
-            if (arr[i] > arr[i + 1])
+            if (arr[j] > arr[j+1])
             {
-                tmp = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = tmp;
-                swapped = true;
+                swap(arr, j, j+1);
             }
         }
     }
