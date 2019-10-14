@@ -1,57 +1,50 @@
-"use strict";
-import { LinkedList } from "./linked-list";
-export class Queue {
-    constructor() {
-        this.count = 0;
-        this.list = new LinkedList();
+function Queue() {
+    var items = [];
+
+    this.enqueue = function(element){
+        items.push(element);
     }
-    enqueue(value) {
-        this.list.insert(value, this.count);
-        this.count++;
+
+    this.dequeue = function(element) {
+        items.shift();
     }
-    dequeue() {
-        if (this.count > 0) {
-            this.list.removeAt(0);
-            this.count--;
-        }
+
+    this.front = function() {
+        return items[0];
     }
-    peek() {
-        return this.list.getElementAt(0).value;
+
+    this.isEmpty = function() {
+        return items.length == 0;
     }
-    printQueue() {
-        return this.list.printList();
+
+    this.clear = function() {
+        items = [];
+    }
+
+    this.size = function() {
+        return items.length;
+    }
+
+    this.print = function() {
+        console.log(items.toString());
     }
 }
 
 let queue = new Queue();
-console.log("enqueue");
-queue.enqueue("element 1");
-console.log("enqueue");
-queue.enqueue("element 2");
-console.log("enqueue");
-queue.enqueue("element 3");
-console.log("enqueue");
-queue.enqueue("element 4");
-console.log(queue.printQueue());
-console.log("get first: ");
-console.log(queue.peek());
-console.log("dequeue");
+
+queue.enqueue("Cat");
+queue.enqueue("Dog");
+queue.enqueue("Shark");
+queue.print();
 queue.dequeue();
-console.log(queue.printQueue());
-console.log("get first: ");
-console.log(queue.peek());
-console.log("dequeue");
+queue.print();
+console.log(queue.size());
+console.log(queue.isEmpty());
+queue.print();
 queue.dequeue();
-console.log(queue.printQueue());
-console.log("get first: ");
-console.log(queue.peek());
-console.log("dequeue");
-queue.dequeue();
-console.log(queue.printQueue());
-console.log("get first: ");
-console.log(queue.peek());
-console.log("dequeue");
-queue.dequeue();
-console.log(queue.printQueue());
-queue.dequeue();
-console.log(queue.printQueue());
+queue.print();
+console.log(queue.size());
+console.log(queue.isEmpty());
+queue.clear();
+queue.print();
+console.log(queue.size());

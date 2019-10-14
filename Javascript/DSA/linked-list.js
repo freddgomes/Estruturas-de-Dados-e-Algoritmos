@@ -1,145 +1,92 @@
-"use strict";
-class Node {
-    constructor(value) {
-        this.value = value;
-    }
-    toString() {
-        return JSON.stringify(this);
-    }
-}
-export class LinkedList {
-    constructor() {
-        this.length = 0;
-    }
-    add(value) {
-        if (this.head == undefined) {
-            this.head = new Node(value);
-            this.length++;
-            return this.head;
+"use strict"
+
+let { Node } = require("./node");
+
+function LinkedList() {
+    let node = Node;
+
+    let length = 0;
+    let head = null;
+
+    this.append = function(element){ 
+        let node = new Node(element);
+
+        if (head == null) {
+            head = node;
         }
-        let node = this.head;
-        while (node.next != undefined) {
-            node = node.next;
+        else {
+            let current = head;
+            while (current.next) {
+                current = current.next;
+            }
+            current.next = node;
         }
-        node.next = new Node(value);
-        this.length++;
-        return node.next;
-    }
-    insert(value, index) {
-        if (index >= 0 && index <= this.length) {
-            let node = new Node(value);
-            if (index == 0) {
-                let current = this.head;
+        length++;
+     }
+
+    this.insert = function(position, element) {
+        if (position >= 0 && position <= length) {
+            let node = new Node(element);
+            current = head;
+            previous = null;
+            index = 0;
+
+            if (position === 0) {
                 node.next = current;
-                this.head = node;
+                head = node;
             }
             else {
-                let previous = this.getElementAt(index - 1);
-                let current = previous.next;
+                while (index++ < position) {
+                    previous = current;
+                    current = current.next;
+                }
                 node.next = current;
                 previous.next = node;
             }
-            this.length++;
         }
     }
-    removeAt(index) {
-        if (index >= 0 && index < this.length) {
-            let currentNode = this.head;
-            if (index === 0) {
-                this.head = currentNode.next;
+    this.removeAt = function(position){
+        if (position > -1 && position < length) {
+            let current = head;
+            let previous = null;
+            let index = 0;
+
+            if (position === 0) {
+                head = current.next;
             }
             else {
-                let previous;
-                for (var i = 0; i < index; i++) {
-                    previous = currentNode;
-                    currentNode = currentNode.next;
+                while (index++ < position) {
+                    previous = current;
+                    current = current.next;
                 }
-                previous.next = currentNode.next;
+
+                previous.next = current.next;
             }
-            this.length--;
+            length--;
+            return current.element;
+        } else {
+            return null;
         }
     }
-    remove(value) {
-        let index = this.indexOf(value);
-        this.removeAt(index);
-    }
-    indexOf(value) {
-        let current = this.head;
-        for (var i = 0; i < this.length && current != undefined; i++) {
-            if (current.value === value) {
-                return i;
-            }
+    this.remove = function(element) {}
+    this.indexOf  = function(element) {}
+    this.isEmpty = function() {}
+    this.size = function() { return length; }
+    
+    this.toString = function() { 
+        let current = head;
+        let string = '';
+        while (current) {
+            string = current.element + ' -> ' + string;
             current = current.next;
         }
-        return -1;
+        return string;
     }
-    getElementAt(index) {
-        if (index >= 0 && index <= this.length) {
-            let node = this.head;
-            for (var i = 0; i < index && node != undefined; i++) {
-                node = node.next;
-            }
-            return node;
-        }
-        return undefined;
-    }
-    printList() {
-        return this.head ? this.head.toString() : '';
-    }
+    this.print = function() { console.log(this.toString())}   
 }
 
 let list = new LinkedList();
-console.log("insert value: 9");
-list.add(9);
-console.log("insert value: 4");
-list.add(4);
-console.log("insert value: 7");
-list.add(7);
-console.log("insert value: 3");
-list.add(3);
-console.log("insert value: 29");
-list.add(29);
-console.log("insert value: 14");
-list.add(14);
-console.log(list.printList());
-console.log(list.length);
-console.log("remove at: 2");
-list.removeAt(2);
-console.log(list.printList());
-console.log(list.length);
-console.log("remove at: 4");
-list.removeAt(4);
-console.log(list.printList());
-console.log(list.length);
-list.removeAt(4);
-console.log(list.printList());
-console.log(list.length);
-console.log("remove at: -1");
-list.removeAt(-1);
-console.log(list.printList());
-console.log(list.length);
-list.removeAt(0);
-console.log(list.printList());
-console.log(list.length);
-console.log("get element by index 0: ");
-console.log(list.getElementAt(0) ? list.getElementAt(0).toString() : undefined);
-console.log("get element by index 2: ");
-console.log(list.getElementAt(2) ? list.getElementAt(2).toString() : undefined);
-console.log("insert value 77 at index 1");
-list.insert(77, 1);
-console.log(list.printList());
-list.add(1);
-console.log(list.printList());
-console.log("get index by value: 77");
-console.log(list.indexOf(77));
-console.log("get index by value: 17");
-console.log(list.indexOf(17));
-console.log("remove element 29");
-list.remove(29);
-console.log(list.printList());
-console.log("remove element 9");
-list.remove(9);
-console.log(list.printList());
-console.log("remove element 3");
-list.remove(3);
-console.log(list.printList());
+console.log(list.size());
+list.append(99);
+list.append(22);
+list.print();

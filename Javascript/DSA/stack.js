@@ -1,43 +1,51 @@
-"use strict";
-import { LinkedList } from "./linked-list";
+"use strict"
 
-export class Stack {
-    constructor() {
-        this.count = 0;
-        this.list = new LinkedList();
+function Stack() {
+    var items = [];
+
+    this.push = function(element) {
+        items.push(element);
     }
-    push(value) {
-        this.list.insert(value, this.count);
-        this.count++;
+
+    this.pop = function() {
+        return items.pop();
     }
-    pop() {
-        this.list.removeAt(this.count - 1);
-        this.count--;
+
+    this.peek = function() {
+        return items[items.length - 1];
     }
-    printStack() {
-        return this.list.printList();
+
+    this.isEmpty = function() {
+        return items.length == 0;
+    }
+
+    this.size = function() {
+        return items.length;
+    }
+    this.clear = function() {
+        items = [];
+    }
+
+    this.print = function() {
+        console.log(items.toString());
     }
 }
+
 let stack = new Stack();
-console.log("inserting values");
-stack.push(1);
-console.log(stack.printStack());
+
 stack.push(2);
-console.log(stack.printStack());
-stack.push(3);
-console.log(stack.printStack());
-stack.push(4);
-console.log(stack.printStack());
-console.log("removing values");
-stack.pop();
-console.log(stack.printStack());
-stack.pop();
-console.log(stack.printStack());
-stack.pop();
-console.log(stack.printStack());
-stack.pop();
-console.log(stack.printStack());
-stack.pop();
-console.log(stack.printStack());
-stack.pop();
-console.log(stack.printStack());
+stack.push(88);
+stack.push(21);
+stack.push(5);
+stack.push(2);
+stack.push(56);
+stack.print();
+console.log(stack.size());
+console.log(stack.pop());
+stack.print();
+console.log(stack.isEmpty());
+console.log(stack.pop());
+stack.print();
+console.log(stack.isEmpty());
+stack.clear();
+console.log(stack.size());
