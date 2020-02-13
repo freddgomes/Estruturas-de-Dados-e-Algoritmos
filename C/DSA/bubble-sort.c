@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#define MAX 20
+#define MAX 15
 
 //A ordenação por bolha (bubble sort) é um algoritmo de classificação simples. 
 //Esse algoritmo de classificação é um algoritmo baseado em comparação,
