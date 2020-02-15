@@ -1,107 +1,117 @@
 function TSet() {
-    let items = {};
+    this.items = [];
 
-    this.has = function (value) {
-        return items.hasOwnProperty(value);
-    }
-    this.add = function (value) {
-        if (!this.has(value)) {
-            items[value] = value;
+    this.add = function (data) {
+        if (this.items.indexOf(data) < 0) {
+            this.items.push(data);
             return true;
         }
         return false;
     }
-    this.delete = function (value) {
-        if (this.has(value)) {
-            delete items[value];
+
+    this.remove = function (data) {
+        const pos = this.items.indexOf(data);
+        if (pos > -1) {
+            this.items.splice(pos, 1);
             return true;
         }
         return false;
     }
-    this.clear = function () {
-        items = {};
+
+    this.contains = function (data) {
+        return this.items.indexOf(data) > -1;
     }
-    this.size = function () {
-        return Object.keys(items).length;
-    }
-    this.values = function () {
-        let values = [];
-        for (let i = 0, keys = Object.keys(items); i < keys.length; i++) {
-            values.push(items[keys[i]]);
+    this.union = function (set) {
+        let tempSet = new TSet();
+        for (let i = 0; i < this.items.length; i++) {
+            tempSet.add(this.items[i]);
         }
-        return values;
-    }
-    this.union = function (otherSet) {
-        let unionSet = new TSet();
-        let values = this.values();
-        for (let i = 0; i < values.length; i++) {
-            unionSet.add(values[i]);
-        }
-        values = otherSet.values();
-        for (let i = 0; i < values.length; i++) {
-            unionSet.add(values[i]);
-        }
-        return unionSet;
-    }
-    this.intersection = function (otherSet) {
-        let intersectionSet = new TSet();
-        let values = this.values();
-        for (let i = 0; i < values.length; i++) {
-            if (otherSet.has(values[i])) {
-                intersectionSet.add(values[i]);
+        for (let i = 0; i < set.items.length; i++) {
+            if (!tempSet.contains(set.items[i])) {
+                tempSet.add(set.items[i]);
             }
         }
-        return intersectionSet;
+        return tempSet;
     }
-    this.difference = function (otherSet) {
-        let differenceSet = new TSet();
-        let values = this.values();
-        for (let i = 0; i < values.length; i++) {
-            if (!otherSet.has(values[i])) {
-                differenceSet.add(values[i]);
+
+    this.intersect = function (set) {
+        let tempSet = new TSet();
+        for (let i = 0; i < this.items.length; i++) {
+            if (set.contains(this.items[i])) {
+                tempSet.add(this.items[i]);
             }
         }
-        return differenceSet;
+        return tempSet;
     }
-    this.subset = function (otherSet) {
-        if (this.size() > otherSet.size()) {
+
+    this.subset = function (set) {
+        if (this.size() > set.size()) {
             return false;
         }
-        else {
-            let values = this.values();
-            for (let i = 0; i < values.length; i++) {
-                if (!otherSet.has(values[i])) {
-                    return false;
-                }
+        for (let i = 0; i < this.items.length; i++) {
+            if (!set.contains(this.items[i])) {
+                return false;
             }
-            return true;
-        }5
+        }
+        return true;
+    }
+    this.difference = function (set) {
+        let tempSet = new TSet();
+        for (let i = 0; i < this.items.length; ++i) {
+            if (!set.contains(this.items[i])) {
+                tempSet.add(this.items[i]);
+            }
+        }
+        return tempSet;
+    }
+
+    this.display = function () {
+        return console.log(this.items);
+    }
+    this.size = function () {
+        return this.items.length;
     }
 }
-let set = new TSet();
-set.add('test');
-set.add(7);
-set.add('js');
-console.log(set.size());
-console.log(set.has(8));
-console.log(set.has('test'));
-console.log(set.delete(7));
-console.log(set.delete(6));
-console.log(set.has(7));
-console.log(set.values());
+const set = new TSet();
+set.add("dog");
+set.add("dog");
+set.add("cat");
+set.add("pig");
+set.add("bird");
+set.remove("snake");
+set.remove("cat");
 
-let setA = new TSet(); setA.add(1); setA.add(2); setA.add(3); setA.add(9);
-let setB = new TSet(); setB.add(3); setB.add(4); setB.add(2); setB.add(6);
-let setC = new TSet(); setC.add(10); setC.add(1); setC.add(2); setC.add(3); setC.add(9);
+const set2 = new TSet();
+set2.add("shark");
+set2.add("lion");
+set2.add("dog");
+set2.add("bird");
 
-let unionAB = setA.union(setB);
-console.log(unionAB.values());
+const set3 = new TSet();
+set3.add("shark");
+set3.add("lion");
+set3.add("dog");
+set3.add("pig");
+set3.add("bird");
+set3.add("spider");
 
-let intersectionAB = setA.intersection(setB);
-console.log(intersectionAB.values());
+let unionSet = set.union(set2);
+let intersectSet = set.intersect(set2);
+let differenceSet = set.difference(set2);
 
-let differenceAB = setA.difference(setB);
-console.log(differenceAB.values());
+console.log("set 1: ");
+set.display();
+console.log("set 2: ");
+set2.display();
+console.log("set 3: ");
+set3.display();
 
-console.log(setA.subset(setB));
-console.log(setA.subset(setC));
+console.log("union: ");
+unionSet.display();
+console.log("intersect: ");
+intersectSet.display();
+console.log("difference: ");
+differenceSet.display();
+console.log("set is a subset of set3: ", set.subset(set3));
+console.log("set2 is a subset of set3: ", set2.subset(set3));
+console.log("set3 is a subset of set2: ", set3.subset(set2));
