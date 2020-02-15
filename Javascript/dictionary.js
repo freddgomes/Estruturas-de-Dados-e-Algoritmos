@@ -19,7 +19,6 @@ function Dictionary() {
     this.clear = function() {
         items = new Array();
     }
-
 }
 
 let dictionary = new Dictionary();
