@@ -1,22 +1,54 @@
 function HashTable() {
-    let table = [];
-    this.put = function (key, value) {
-        let position = hashPosition(key);
-        console.log(position + ' - ' + key);
-        table[position] = value;
+    this.table = new Array(137);
+    this.values = [];
+
+    this.get = get;
+    this.put = put;
+    this.hash = hash;
+    this.display = display;
+
+    function get(key) {
+        let hash = this.hash(key);
+        return this.values[hash];
+
     }
-    this.remove = function (key) {
-        table[hashPosition(key)] = undefined;
-    }
-    this.get = function (key) {
-        return table[hashPosition(key)];
-    }
-    let hashPosition = function (key) {
-        let hash = 0;
-        for (let i = 0; i < key.length; i++) {
-            hash += key.charCodeAt(i);
+    function put(key, data) {
+        let pos = this.hash(key);
+        if (this.table[pos] == undefined) {
+            this.table[pos] = key;
+            this.values[pos] = data;
         }
-        return hash % 42;
+        else {
+            while (this.table[pos] != undefined) {
+                pos++;
+            }
+            this.table[pos] = key;
+            this.values[pos] = value;
+        }
+    }
+    function hash(key) {
+        const H = 37;
+        let total = 0;
+        let str = key.toString();
+        for (let i = 0; i < str.length; i++) {
+            total += H * total + str.charCodeAt(i);
+        }
+        total = total % this.table.length;
+        if (total < 0) {
+            total += this.table.length - 1;
+        }
+        return parseInt(total);
+    }
+
+    function display() {
+        for (let i = 0; i < this.table.length; i++) {
+            if (this.table[i] != undefined) {
+                let key = this.table[i];
+                let hash = this.hash(key);
+                let data = this.values[hash];
+                console.log(key + ": " + data);
+            }
+        }
     }
 }
 
@@ -24,8 +56,8 @@ let hash = new HashTable();
 hash.put('leia', 'leia@email.com')
 hash.put('luke', 'luke@email.com')
 hash.put('yoda', 'yoda@email.com')
-
-console.log(hash.get('vader'))
-console.log(hash.get('yoda'))
-hash.remove('leia')
-console.log(hash.get('leia'))
+hash.display();
+console.log(hash.get('ben'));
+console.log(hash.get('yoda'));
+console.log(hash.get('leia'));
+console.log(hash.get('vader'));
